@@ -1,0 +1,486 @@
+import 'dart:io';
+import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:flutter/material.dart';
+
+class AutomateStoryTicianaWerner extends StatefulWidget {
+  const AutomateStoryTicianaWerner({Key? key, required this.title})
+      : super(key: key);
+
+  final String title;
+
+  @override
+  State<AutomateStoryTicianaWerner> createState() =>
+      _AutomateStoryTicianaWernerState();
+}
+
+class _AutomateStoryTicianaWernerState
+    extends State<AutomateStoryTicianaWerner> {
+  String description = "";
+  bool hasDescription = false;
+  void changeDescriptionStatus() {
+    setState(() {
+      hasDescription = true;
+    });
+  }
+
+  List<String> separateParagraphs(String text) {
+    return text.split(RegExp(r'\s{2,}'));
+  }
+
+  List<String> separateWords(String text) {
+    return text.split(' ');
+  }
+
+  List<String> separateLines(String text) {
+    return text.split("\n");
+  }
+
+  List<String> separateDayMonth(String text) {
+    return text.split('/');
+  }
+
+  List<String> separateBarra(String text) {
+    return text.split('-');
+  }
+
+  List<String> separatePrice(String text) {
+    return text.split(',');
+  }
+
+  List<String> separateHour(String text) {
+    return text.split('h');
+  }
+
+  List<String> removeLetters(String text) {
+    return text.split(RegExp(r'[^0-9]'));
+  }
+
+  String removeZero(String text) {
+    return text.replaceAll('0', '');
+  }
+
+  String removeSpace(String text) {
+    return text.replaceAll(' ', '');
+  }
+
+  String removeH(String text) {
+    return text.replaceAll('h', '');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Get the name of the current day of the week.
+
+    // Get the numeric value for the current day. Use the null-aware operator (??) to provide a default value.
+
+    0; // 0 is the default value, change it as needed
+    String url = "https://www.instagram.com/ticianawerner/";
+    String local = "Restaurante Ticiana Werner";
+    int price = 0;
+    String priceString = "0";
+    int year = 2024;
+    List<String> paragraphs = separateParagraphs(description);
+    String firstParagraph = hasDescription ? paragraphs[1] : "";
+    List<String> firstTerms = separateLines(firstParagraph);
+    //
+    List<String> firstfullDate = separateBarra(firstTerms[0]);
+    List<String> firstDate =
+        separateDayMonth(hasDescription ? firstfullDate[1] : "");
+    String firstDay = removeSpace(hasDescription ? firstDate[0] : "");
+
+    String firstMonth = removeSpace(hasDescription ? firstDate[1] : "");
+    //
+    List<String> firstartistAndHour =
+        separateBarra(hasDescription ? firstTerms[1] : "");
+    //
+    String firstartist = hasDescription ? firstartistAndHour[0] : "";
+    String firsttitle = hasDescription ? firstartist + "no " + local : "";
+    //
+    List<String> firstHourElements =
+        separateWords(hasDescription ? firstartistAndHour[1] : "");
+    List<String> firststarttime =
+        separateHour(hasDescription ? firstHourElements[1] : "");
+    String firstendHour = removeH(hasDescription ? firstHourElements[3] : "");
+    String firstStartHour = hasDescription ? firststarttime[0] : "";
+    String firstStartMinute = hasDescription ? firststarttime[1] : "";
+    //
+    int firstIntDay = hasDescription ? int.parse(firstDay) : 0;
+    int firstIntMonth = hasDescription ? int.parse(firstMonth) : 0;
+    int firstStartIntHour = hasDescription ? int.parse(firstStartHour) : 0;
+    int firstStartIntMinute = hasDescription ? int.parse(firstStartMinute) : 0;
+    int firstendIntHour = hasDescription ? int.parse(firstendHour) : 0;
+    String firstformattedDate =
+        '$year-$firstIntMonth-$firstIntDay $firstStartIntHour:$firstStartIntMinute:00';
+    String firstformattedEndDate =
+        '$year-$firstIntMonth-$firstIntDay $firstendIntHour:00:00';
+    //
+/////////////////////////////////////////////////////////////////////
+    String secondParagraph = hasDescription ? paragraphs[2] : "";
+    List<String> secondTerms = separateLines(secondParagraph);
+    //
+    List<String> secondfullDate = separateBarra(secondTerms[0]);
+    List<String> secondDate =
+        separateDayMonth(hasDescription ? secondfullDate[1] : "");
+    String secondDay = removeSpace(hasDescription ? secondDate[0] : "");
+    String secondMonth = removeSpace(hasDescription ? secondDate[1] : "");
+    //
+    List<String> secondartistAndHour =
+        separateBarra(hasDescription ? secondTerms[1] : "");
+    //
+    String secondartist = hasDescription ? secondartistAndHour[0] : "";
+    String secondtitle = hasDescription ? secondartist + "no " + local : "";
+    //
+    List<String> secondHourElements =
+        separateWords(hasDescription ? secondartistAndHour[1] : "");
+    List<String> secondstarttime =
+        separateHour(hasDescription ? secondHourElements[1] : "");
+    String secondendHour = removeH(hasDescription ? secondHourElements[3] : "");
+    String secondStartHour = hasDescription ? secondstarttime[0] : "";
+    String secondStartMinute = hasDescription ? secondstarttime[1] : "";
+    //
+    int secondIntDay = hasDescription ? int.parse(secondDay) : 0;
+    int secondIntMonth = hasDescription ? int.parse(secondMonth) : 0;
+    int secondStartIntHour = hasDescription ? int.parse(secondStartHour) : 0;
+    int secondStartIntMinute =
+        hasDescription ? int.parse(secondStartMinute) : 0;
+    int secondendIntHour = hasDescription ? int.parse(secondendHour) : 0;
+    String secondformattedDate =
+        '$year-$secondIntMonth-$secondIntDay $secondStartIntHour:$secondStartIntMinute:00';
+    String secondformattedEndDate =
+        '$year-$secondIntMonth-$secondIntDay $secondendIntHour:00:00';
+/////////////////////////////////////////////////////////////////////
+    String thirdParagraph = hasDescription ? paragraphs[3] : "";
+    List<String> thirdTerms = separateLines(thirdParagraph);
+    //
+    List<String> thirdfullDate = separateBarra(thirdTerms[0]);
+    List<String> thirdDate =
+        separateDayMonth(hasDescription ? thirdfullDate[1] : "");
+    String thirdDay = removeSpace(hasDescription ? thirdDate[0] : "");
+    String thirdMonth = removeSpace(hasDescription ? thirdDate[1] : "");
+    //
+    List<String> thirdartistAndHour =
+        separateBarra(hasDescription ? thirdTerms[1] : "");
+    //
+    String thirdartist = hasDescription ? thirdartistAndHour[0] : "";
+    String thirdtitle = hasDescription ? thirdartist + "no " + local : "";
+    //
+    List<String> thirdHourElements =
+        separateWords(hasDescription ? thirdartistAndHour[1] : "");
+    List<String> thirdstarttime =
+        separateHour(hasDescription ? thirdHourElements[1] : "");
+    String thirdendHour = removeH(hasDescription ? thirdHourElements[3] : "");
+    String thirdStartHour = hasDescription ? thirdstarttime[0] : "";
+    String thirdStartMinute = hasDescription ? thirdstarttime[1] : "";
+    //
+    int thirdIntDay = hasDescription ? int.parse(thirdDay) : 0;
+    int thirdIntMonth = hasDescription ? int.parse(thirdMonth) : 0;
+    int thirdStartIntHour = hasDescription ? int.parse(thirdStartHour) : 0;
+    int thirdStartIntMinute = hasDescription ? int.parse(thirdStartMinute) : 0;
+    int thirdendIntHour = hasDescription ? int.parse(thirdendHour) : 0;
+    String thirdformattedDate =
+        '$year-$thirdIntMonth-$thirdIntDay $thirdStartIntHour:$thirdStartIntMinute:00';
+    String thirdformattedEndDate =
+        '$year-$thirdIntMonth-$thirdIntDay $thirdendIntHour:00:00';
+    /////////////////////////////////////////////////////////////////////
+    String forthParagraph = hasDescription ? paragraphs[4] : "";
+    List<String> forthTerms = separateLines(forthParagraph);
+    //
+    List<String> forthfullDate = separateBarra(forthTerms[0]);
+    List<String> forthDate =
+        separateDayMonth(hasDescription ? forthfullDate[1] : "");
+    String forthDay = removeSpace(hasDescription ? forthDate[0] : "");
+    String forthMonth = removeSpace(hasDescription ? forthDate[1] : "");
+    //
+    List<String> forthartistAndHour =
+        separateBarra(hasDescription ? forthTerms[1] : "");
+    //
+    String forthartist = hasDescription ? forthartistAndHour[0] : "";
+    String forthtitle = hasDescription ? forthartist + "no " + local : "";
+    //
+    List<String> forthHourElements =
+        separateWords(hasDescription ? forthartistAndHour[1] : "");
+    List<String> forthstarttime =
+        separateHour(hasDescription ? forthHourElements[1] : "");
+    String forthendHour = removeH(hasDescription ? forthHourElements[3] : "");
+    String forthStartHour = hasDescription ? forthstarttime[0] : "";
+    String forthStartMinute = hasDescription ? forthstarttime[1] : "";
+    //
+    int forthIntDay = hasDescription ? int.parse(forthDay) : 0;
+    int forthIntMonth = hasDescription ? int.parse(forthMonth) : 0;
+    int forthStartIntHour = hasDescription ? int.parse(forthStartHour) : 0;
+    int forthStartIntMinute = hasDescription ? int.parse(forthStartMinute) : 0;
+    int forthendIntHour = hasDescription ? int.parse(forthendHour) : 0;
+    String forthformattedDate =
+        '$year-$forthIntMonth-$forthIntDay $forthStartIntHour:$forthStartIntMinute:00';
+    String forthformattedEndDate =
+        '$year-$forthIntMonth-$forthIntDay $forthendIntHour:00:00';
+    /////////////////////////////////////////////////////////////////////
+    String fifthParagraph = hasDescription ? paragraphs[5] : "";
+    List<String> fifthTerms = separateLines(fifthParagraph);
+    //
+    List<String> fifthfullDate = separateBarra(fifthTerms[0]);
+    List<String> fifthDate =
+        separateDayMonth(hasDescription ? fifthfullDate[1] : "");
+    String fifthDay = removeSpace(hasDescription ? fifthDate[0] : "");
+    String fifthMonth = removeSpace(hasDescription ? fifthDate[1] : "");
+    //
+    List<String> fifthartistAndHour =
+        separateBarra(hasDescription ? fifthTerms[1] : "");
+    //
+    String fifthartist = hasDescription ? fifthartistAndHour[0] : "";
+    String fifthtitle = hasDescription ? fifthartist + "no " + local : "";
+    //
+    List<String> fifthHourElements =
+        separateWords(hasDescription ? fifthartistAndHour[1] : "");
+    List<String> fifthstarttime =
+        separateHour(hasDescription ? fifthHourElements[1] : "");
+    String fifthendHour = removeH(hasDescription ? fifthHourElements[3] : "");
+    String fifthStartHour = hasDescription ? fifthstarttime[0] : "";
+    String fifthStartMinute = hasDescription ? fifthstarttime[1] : "";
+    //
+    int fifthIntDay = hasDescription ? int.parse(fifthDay) : 0;
+    int fifthIntMonth = hasDescription ? int.parse(fifthMonth) : 0;
+    int fifthStartIntHour = hasDescription ? int.parse(fifthStartHour) : 0;
+    int fifthStartIntMinute = hasDescription ? int.parse(fifthStartMinute) : 0;
+    int fifthendIntHour = hasDescription ? int.parse(fifthendHour) : 0;
+    String fifthformattedDate =
+        '$year-$fifthIntMonth-$fifthIntDay $fifthStartIntHour:$fifthStartIntMinute:00';
+    String fifthformattedEndDate =
+        '$year-$fifthIntMonth-$fifthIntDay $fifthendIntHour:00:00';
+    /////////////////////////////////////////////////////////////////////
+    String sixthParagraph = hasDescription ? paragraphs[6] : "";
+    List<String> sixthTerms = separateLines(sixthParagraph);
+    //
+    List<String> sixthfullDate = separateBarra(sixthTerms[0]);
+    List<String> sixthDate =
+        separateDayMonth(hasDescription ? sixthfullDate[1] : "");
+    String sixthDay = removeSpace(hasDescription ? sixthDate[0] : "");
+    String sixthMonth = removeSpace(hasDescription ? sixthDate[1] : "");
+    //
+    List<String> sixthartistAndHour =
+        separateBarra(hasDescription ? sixthTerms[1] : "");
+    //
+    String sixthartist = hasDescription ? sixthartistAndHour[0] : "";
+    String sixthtitle = hasDescription ? sixthartist + "no " + local : "";
+    //
+    List<String> sixthHourElements =
+        separateWords(hasDescription ? sixthartistAndHour[1] : "");
+    List<String> sixthstarttime =
+        separateHour(hasDescription ? sixthHourElements[1] : "");
+    String sixthendHour = removeH(hasDescription ? sixthHourElements[3] : "");
+    String sixthStartHour = hasDescription ? sixthstarttime[0] : "";
+    String sixthStartMinute = hasDescription ? sixthstarttime[1] : "";
+    //
+    int sixthIntDay = hasDescription ? int.parse(sixthDay) : 0;
+    int sixthIntMonth = hasDescription ? int.parse(sixthMonth) : 0;
+    int sixthStartIntHour = hasDescription ? int.parse(sixthStartHour) : 0;
+    int sixthStartIntMinute = hasDescription ? int.parse(sixthStartMinute) : 0;
+    int sixthendIntHour = hasDescription ? int.parse(sixthendHour) : 0;
+    String sixthformattedDate =
+        '$year-$sixthIntMonth-$sixthIntDay $sixthStartIntHour:$sixthStartIntMinute:00';
+    String sixthformattedEndDate =
+        '$year-$sixthIntMonth-$sixthIntDay $sixthendIntHour:00:00';
+
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: <Widget>[
+            Container(
+              height: 450,
+              width: 300,
+              color: Colors.lightBlue,
+              child: TextField(
+                decoration: InputDecoration(
+                  labelText: "Description",
+                  hintText: "Colar Descrição",
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    description = value;
+                  });
+                },
+                maxLines: null,
+                expands: true,
+              ),
+            ),
+            Container(
+              height: 450,
+              width: 300,
+              color: Colors.lightBlue,
+              child: SingleChildScrollView(
+                  child: hasDescription
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(child: Text("Descrição")),
+                            Container(child: Text(paragraphs[0])),
+                            SizedBox(height: 10),
+                            Container(child: Text(paragraphs[1])),
+                            SizedBox(height: 10),
+                            Container(child: Text(firsttitle)),
+                            Container(child: Text(firstformattedDate)),
+                            Container(child: Text(firstformattedEndDate)),
+                            Container(child: Text(url)),
+                            Container(child: Text(local)),
+                            Container(child: Text(price.toString())),
+                          ],
+                        )
+                      : Text("no Paragraph")),
+            ),
+            Container(
+              height: 450,
+              width: 300,
+              color: Colors.lightBlue,
+              child: SingleChildScrollView(
+                  child: hasDescription
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(child: Text("Descrição")),
+                            Container(child: Text(paragraphs[0])),
+                            SizedBox(height: 10),
+                            Container(child: Text(paragraphs[2])),
+                            SizedBox(height: 10),
+                            Container(child: Text(secondtitle)),
+                            Container(child: Text(secondformattedDate)),
+                            Container(child: Text(secondformattedEndDate)),
+                            Container(child: Text(url)),
+                            Container(child: Text(local)),
+                            Container(child: Text(price.toString())),
+                          ],
+                        )
+                      : Text("no Paragraph")),
+            ),
+            Container(
+              height: 450,
+              width: 300,
+              color: Colors.lightBlue,
+              child: SingleChildScrollView(
+                  child: hasDescription
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(child: Text("Descrição")),
+                            Container(child: Text(paragraphs[0])),
+                            SizedBox(height: 10),
+                            Container(child: Text(paragraphs[3])),
+                            SizedBox(height: 10),
+                            Container(child: Text(thirdtitle)),
+                            Container(child: Text(thirdformattedDate)),
+                            Container(child: Text(thirdformattedEndDate)),
+                            Container(child: Text(url)),
+                            Container(child: Text(local)),
+                            Container(child: Text(price.toString())),
+                          ],
+                        )
+                      : Text("no Paragraph")),
+            ),
+            Container(
+              height: 450,
+              width: 300,
+              color: Colors.lightBlue,
+              child: SingleChildScrollView(
+                  child: hasDescription
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(child: Text("Descrição")),
+                            Container(child: Text(paragraphs[0])),
+                            SizedBox(height: 10),
+                            Container(child: Text(paragraphs[4])),
+                            SizedBox(height: 10),
+                            Container(child: Text(forthtitle)),
+                            Container(child: Text(forthformattedDate)),
+                            Container(child: Text(forthformattedEndDate)),
+                            Container(child: Text(url)),
+                            Container(child: Text(local)),
+                            Container(child: Text(price.toString())),
+                          ],
+                        )
+                      : Text("no Paragraph")),
+            ),
+            Container(
+              height: 450,
+              width: 300,
+              color: Colors.lightBlue,
+              child: SingleChildScrollView(
+                  child: hasDescription
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(child: Text("Descrição")),
+                            Container(child: Text(paragraphs[0])),
+                            SizedBox(height: 10),
+                            Container(child: Text(paragraphs[5])),
+                            SizedBox(height: 10),
+                            Container(child: Text(fifthtitle)),
+                            Container(child: Text(fifthformattedDate)),
+                            Container(child: Text(fifthformattedEndDate)),
+                            Container(child: Text(url)),
+                            Container(child: Text(local)),
+                            Container(child: Text(price.toString())),
+                          ],
+                        )
+                      : Text("no Paragraph")),
+            ),
+            Container(
+              height: 450,
+              width: 300,
+              color: Colors.lightBlue,
+              child: SingleChildScrollView(
+                  child: hasDescription
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(child: Text("Descrição")),
+                            Container(child: Text(paragraphs[0])),
+                            SizedBox(height: 10),
+                            Container(child: Text(paragraphs[6])),
+                            SizedBox(height: 10),
+                            Container(child: Text(sixthtitle)),
+                            Container(child: Text(sixthformattedDate)),
+                            Container(child: Text(sixthformattedEndDate)),
+                            Container(child: Text(url)),
+                            Container(child: Text(local)),
+                            Container(child: Text(price.toString())),
+                          ],
+                        )
+                      : Text("no Paragraph")),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            hasDescription = true;
+            // Get the last paragraph
+            String lastParagraph = paragraphs.last;
+
+// Split the last paragraph into lines using '\n' as the delimiter
+            List<String> linesInLastParagraph = lastParagraph.split('\n');
+
+// Select the string in the last line
+            String lastLineString = linesInLastParagraph.last;
+            // saveTextToFile(paragraphs, firstLineTerms);
+            print(lastLineString);
+            List<String> info = lastLineString.split(' ');
+            print(info.last);
+            var priceFull = info.last;
+            List<String> priceInt = priceFull.split(',');
+            var price = priceInt[0];
+            print(price);
+          });
+        },
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
